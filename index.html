@@ -106,9 +106,9 @@
         
         <div class="container mx-auto px-6 py-12 sm:py-20 md:py-32 landscape:py-10 max-w-5xl flex flex-col items-center justify-center">
             
-            <!-- Logo Centrado SIN mix-blend para que se vea su color real -->
+            <!-- Logo Centrado: Añadimos mix-blend-multiply para borrar el fondo blanco del JPG -->
             <div class="animate-on-load animate-fade-in-up mb-8" style="animation-delay: 0.1s;">
-                <img id="main-logo" src="logo.jpg" alt="Minima Software Logo" class="w-48 sm:w-64 md:w-80 lg:w-[400px] hover:scale-105 transition-transform duration-700">
+                <img id="main-logo" src="logo.jpg" alt="Minima Software Logo" class="w-48 sm:w-64 md:w-80 lg:w-[400px] mix-blend-multiply hover:scale-105 transition-transform duration-700">
             </div>
 
             <div class="animate-on-load animate-fade-in-up flex flex-col items-center" style="animation-delay: 0.2s;">
@@ -327,35 +327,6 @@
 
     <script>
         lucide.createIcons();
-
-        // --- SCRIPT MÁGICO PARA IGUALAR EL COLOR DE FONDO ---
-        window.addEventListener('load', () => {
-            const logo = document.getElementById('main-logo');
-            if (logo) {
-                const matchBackgroundColor = () => {
-                    try {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = 1;
-                        canvas.height = 1;
-                        const ctx = canvas.getContext('2d');
-                        // Tomamos el color exacto del primer píxel de la imagen
-                        ctx.drawImage(logo, 0, 0, 1, 1);
-                        const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-                        
-                        // Pintamos toda la web con ese tono exacto
-                        if (r > 230 && g > 230 && b > 230) {
-                            document.documentElement.style.setProperty('--bg-brand', `rgb(${r}, ${g}, ${b})`);
-                        }
-                    } catch (e) {
-                        console.log('No se pudo leer el color por CORS (ejecución local).');
-                    }
-                };
-                
-                if(logo.complete) matchBackgroundColor();
-                else logo.addEventListener('load', matchBackgroundColor);
-            }
-        });
-        // ----------------------------------------------------
 
         let currentOpenProductId = null;
 
