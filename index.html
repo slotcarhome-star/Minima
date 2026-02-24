@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Minima | Desarrollo Minimalista</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        /* Añadimos fuentes del sistema por defecto para que cargue instantáneamente antes que Inter */
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ocultar elementos antes de la animación para evitar parpadeos */
+        .animate-on-load { opacity: 0; }
+        
+        /* Optimizaciones para móviles de gama baja y fluidez general */
+        html {
+            -webkit-text-size-adjust: 100%; /* Evita que los móviles cambien el tamaño del texto al girar */
+        }
+        
+        /* Si el dispositivo es antiguo o tiene activado reducir movimiento, quitamos animaciones */
+        @media (prefers-reduced-motion: reduce) {
+            .animate-on-load {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+        
+        /* Aceleración por hardware para las animaciones */
+        .animate-fade-in, .animate-fade-in-up {
+            will-change: opacity, transform;
+        }
+
+        /* Utilidad para balanceo de texto */
+        .text-balance {
+            text-wrap: balance;
+        }
+
+        /* Sistema de Idiomas: Oculta el idioma que no esté seleccionado */
+        html[lang="es"] .lang-en { display: none !important; }
+        html[lang="en"] .lang-es { display: none !important; }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased flex flex-col min-h-[100dvh] selection:bg-gray-900 selection:text-white">
+
+    <!-- Navegación -->
+    <nav class="container mx-auto px-6 py-6 md:py-8 flex justify-between items-center animate-on-load animate-fade-in">
+        <div class="text-2xl font-extrabold tracking-tighter flex items-center gap-2">
+            <div class="w-4 h-4 bg-black rounded-sm"></div>
+            Minima.
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-gray-500">
+            <a href="#productos" class="hover:text-black transition-colors">
+                <span class="lang-es">Productos</span><span class="lang-en">Products</span>
+            </a>
+            <a href="#servicios" class="hover:text-black transition-colors">
+                <span class="lang-es">Servicios</span><span class="lang-en">Services</span>
+            </a>
+            <a href="#filosofia" class="hover:text-black transition-colors">
+                <span class="lang-es">Filosofía</span><span class="lang-en">Philosophy</span>
+            </a>
+        </div>
+        <div class="flex items-center gap-4">
+            <!-- Botón de cambio de idioma -->
+            <button onclick="toggleLanguage()" class="text-xs font-bold tracking-widest hover:text-black text-gray-400 transition-colors">
+                <span class="lang-es">EN</span><span class="lang-en">ES</span>
+            </button>
+            <a href="#contacto" class="text-sm font-medium border border-gray-200 px-5 py-2.5 rounded-full hover:border-black hover:bg-black hover:text-white transition-all">
+                <span class="lang-es">Contacto</span><span class="lang-en">Contact</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Sección Hero -->
+    <main class="flex-grow flex flex-col justify-center items-center text-center relative overflow-hidden w-full">
+        <div class="hidden sm:block absolute top-1/2 -translate-y-1/2 -right-20 w-96 h-96 bg-gray-50 rounded-full blur-3xl -z-10"></div>
+        
+        <div class="container mx-auto px-6 py-12 sm:py-20 md:py-32 landscape:py-10 max-w-5xl flex flex-col items-center justify-center">
+            
+            <!-- Logo Centrado -->
+            <div class="animate-on-load animate-fade-in-up mb-8" style="animation-delay: 0.1s;">
+                <img src="logo.jpg" alt="Minima Software Logo" class="w-48 sm:w-64 md:w-80 lg:w-[400px] mix-blend-multiply drop-shadow-xl hover:scale-105 transition-transform duration-700">
+            </div>
+
+            <div class="animate-on-load animate-fade-in-up flex flex-col items-center" style="animation-delay: 0.2s;">
+                <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.1] mb-6 sm:mb-8 text-balance">
+                    <span class="lang-es">Software simple.<br /><span class="text-gray-400">Resultados puros.</span></span>
+                    <span class="lang-en">Simple software.<br /><span class="text-gray-400">Pure results.</span></span>
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-500 mb-8 sm:mb-12 max-w-2xl font-light leading-relaxed text-balance">
+                    <span class="lang-es">En Minima eliminamos el ruido. Construimos herramientas digitales potentes, limpias y diseñadas exactamente para lo que necesitas. Ni más, ni menos.</span>
+                    <span class="lang-en">At Minima we eliminate the noise. We build powerful, clean digital tools designed exactly for what you need. Nothing more, nothing less.</span>
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
+                    <a href="#contacto" class="px-6 py-4 sm:px-8 bg-black text-white rounded-full font-medium text-center hover:bg-gray-800 active:scale-95 sm:hover:scale-105 transition-all duration-300">
+                        <span class="lang-es">Empezar un proyecto</span><span class="lang-en">Start a project</span>
+                    </a>
+                    <a href="#productos" class="px-6 py-4 sm:px-8 bg-gray-50 text-black rounded-full font-medium text-center hover:bg-gray-100 active:bg-gray-200 transition-all duration-300 flex items-center justify-center gap-2">
+                        <span class="lang-es">Ver productos</span><span class="lang-en">View products</span>
+                        <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sección Productos -->
+    <section id="productos" class="py-16 sm:py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="mb-12 sm:mb-16">
+                <h2 class="text-xs sm:text-sm font-bold tracking-widest text-gray-400 uppercase mb-2 sm:mb-3">
+                    <span class="lang-es">Catálogo</span><span class="lang-en">Catalog</span>
+                </h2>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                    <span class="lang-es">Nuestros Productos.</span><span class="lang-en">Our Products.</span>
+                </h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
+                <!-- Producto 1 -->
+                <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('app')">
+                    <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
+                        <img src="app.jpg" alt="Minima App" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima App</h4>
+                        <p class="text-gray-500 text-sm">
+                            <span class="lang-es">Plataforma móvil de gestión.</span><span class="lang-en">Mobile management platform.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('analytics')">
+                    <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
+                        <img src="datos.jpg" alt="Minima Analytics" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima Analytics</h4>
+                        <p class="text-gray-500 text-sm">
+                            <span class="lang-es">Visualización de datos en tiempo real.</span><span class="lang-en">Real-time data visualization.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('core')">
+                    <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
+                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima Core</h4>
+                        <p class="text-gray-500 text-sm">
+                            <span class="lang-es">Sistema central para empresas.</span><span class="lang-en">Core system for enterprises.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="py-16 sm:py-24 bg-gray-50/50">
+        <div class="container mx-auto px-6">
+            <div class="mb-12 sm:mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
+                <div>
+                    <h2 class="text-xs sm:text-sm font-bold tracking-widest text-gray-400 uppercase mb-2 sm:mb-3">
+                        <span class="lang-es">Qué hacemos</span><span class="lang-en">What we do</span>
+                    </h2>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                        <span class="lang-es">Soluciones a medida.</span><span class="lang-en">Custom solutions.</span>
+                    </h3>
+                </div>
+                <p class="text-gray-500 max-w-md text-balance">
+                    <span class="lang-es">Nos especializamos en crear productos digitales que destacan por su rendimiento, usabilidad y arquitectura impecable.</span>
+                    <span class="lang-en">We specialize in creating digital products that stand out for their performance, usability, and flawless architecture.</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <!-- Servicio 1 -->
+                <div class="group p-8 rounded-3xl hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-transparent hover:border-gray-100">
+                    <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="code" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">
+                        <span class="lang-es">Desarrollo Web</span><span class="lang-en">Web Development</span>
+                    </h4>
+                    <p class="text-gray-500 leading-relaxed text-sm">
+                        <span class="lang-es">Aplicaciones web rápidas, seguras y escalables. Utilizamos las tecnologías más modernas para garantizar un rendimiento excepcional.</span>
+                        <span class="lang-en">Fast, secure, and scalable web applications. We use the most modern technologies to ensure exceptional performance.</span>
+                    </p>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="group p-8 rounded-3xl hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-transparent hover:border-gray-100">
+                    <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="smartphone" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">
+                        <span class="lang-es">Diseño de Apps</span><span class="lang-en">App Design</span>
+                    </h4>
+                    <p class="text-gray-500 leading-relaxed text-sm">
+                        <span class="lang-es">Experiencias móviles nativas y multiplataforma con interfaces minimalistas que los usuarios aman usar todos los días.</span>
+                        <span class="lang-en">Native and cross-platform mobile experiences with minimalist interfaces that users love to use every day.</span>
+                    </p>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="group p-8 rounded-3xl hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-transparent hover:border-gray-100">
+                    <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="layers" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">
+                        <span class="lang-es">Sistemas UI/UX</span><span class="lang-en">UI/UX Systems</span>
+                    </h4>
+                    <p class="text-gray-500 leading-relaxed text-sm">
+                        <span class="lang-es">Diseño centrado en el usuario. Interfaces limpias y sistemas de diseño robustos que comunican tu marca con claridad.</span>
+                        <span class="lang-en">User-centered design. Clean interfaces and robust design systems that communicate your brand clearly.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Filosofía Ampliada -->
+    <section id="filosofia" class="py-20 sm:py-32 bg-black text-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 sm:mb-8 text-balance leading-tight">
+                        <span class="lang-es">El arte de lo esencial.<br/><span class="text-gray-500">Menos ruido, más impacto.</span></span>
+                        <span class="lang-en">The art of the essential.<br/><span class="text-gray-500">Less noise, more impact.</span></span>
+                    </h2>
+                </div>
+                <div class="flex flex-col gap-6 text-gray-400 text-base sm:text-lg lg:text-xl font-light leading-relaxed">
+                    <p>
+                        <span class="lang-es">En Minima no desarrollamos software por el simple hecho de añadir funciones. Creemos firmemente que, en un ecosistema digital saturado, la verdadera innovación reside en la claridad. Entendemos que la mejor aplicación es aquella que te permite hacer tu trabajo y desaparecer, sin distracciones.</span>
+                        <span class="lang-en">At Minima, we don't develop software just to add features. We firmly believe that in a saturated digital ecosystem, true innovation lies in clarity. We understand that the best application is the one that lets you do your job and disappear, without distractions.</span>
+                    </p>
+                    <p>
+                        <span class="lang-es">Nuestro proceso se basa en la reducción radical: eliminamos lo superfluo, el código heredado innecesario y las interfaces recargadas. Cada línea de código está optimizada para ofrecer tiempos de carga casi nulos y un rendimiento excepcional. Menos errores, menos confusión y una precisión quirúrgica.</span>
+                        <span class="lang-en">Our process is based on radical reduction: we eliminate the superfluous, unnecessary legacy code, and cluttered interfaces. Every line of code is optimized to deliver near-zero load times and exceptional performance. Fewer bugs, less confusion, and surgical precision.</span>
+                    </p>
+                    <div class="pt-6">
+                        <a href="#contacto" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                            <span class="lang-es">Hablemos de tu idea</span><span class="lang-en">Let's talk about your idea</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contacto -->
+    <footer id="contacto" class="py-12 border-t border-gray-100 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+                <div class="text-2xl font-bold tracking-tighter flex items-center gap-2">
+                    <div class="w-4 h-4 bg-black rounded-sm"></div>
+                    Minima.
+                </div>
+                
+                <div class="flex flex-col md:flex-row gap-6 md:gap-12 text-center md:text-left">
+                    <div>
+                        <h5 class="text-sm font-bold uppercase tracking-wider text-gray-900 mb-2">
+                            <span class="lang-es">Escríbenos</span><span class="lang-en">Email us</span>
+                        </h5>
+                        <a href="mailto:hola@minima.dev" class="text-gray-500 hover:text-black transition-colors">hola@minima.dev</a>
+                    </div>
+                    <div>
+                        <h5 class="text-sm font-bold uppercase tracking-wider text-gray-900 mb-2">
+                            <span class="lang-es">Síguenos</span><span class="lang-en">Follow us</span>
+                        </h5>
+                        <div class="flex gap-4 justify-center md:justify-start">
+                            <a href="#" class="text-gray-400 hover:text-black transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-black transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-black transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+                <p>&copy; 2026 Minima. <span class="lang-es">Todos los derechos reservados.</span><span class="lang-en">All rights reserved.</span></p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-gray-900 transition-colors"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
+                    <a href="#" class="hover:text-gray-900 transition-colors"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Espacio del Producto (Modal Overlay) -->
+    <div id="product-modal" class="fixed inset-0 z-[100] bg-white overflow-y-auto opacity-0 pointer-events-none translate-y-12 transition-all duration-500 ease-out flex flex-col">
+        <div class="sticky top-0 bg-white/90 backdrop-blur-md z-10 border-b border-gray-100 px-6 py-4 md:py-6 flex justify-between items-center">
+            <h3 id="modal-title" class="text-xl md:text-2xl font-bold tracking-tight"></h3>
+            <button onclick="closeProduct()" class="w-10 h-10 md:w-12 md:h-12 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-200 hover:rotate-90 transition-all duration-300 text-gray-900" aria-label="Cerrar">
+                <i data-lucide="x" class="w-5 h-5 md:w-6 md:h-6"></i>
+            </button>
+        </div>
+        
+        <div class="container mx-auto px-6 py-12 md:py-20 max-w-6xl flex-grow">
+            <p id="modal-desc" class="text-lg md:text-2xl lg:text-3xl text-gray-500 font-light leading-relaxed mb-16 max-w-4xl text-balance"></p>
+            <div id="modal-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+        </div>
+    </div>
+
+    <!-- Script de Lógica e Idiomas -->
+    <script>
+        lucide.createIcons();
+
+        let currentOpenProductId = null;
+
+        // Base de datos de productos adaptada a dos idiomas
+        const productsData = {
+            'app': {
+                title: 'Minima App.',
+                description: {
+                    es: 'Diseñada para mantener a tu equipo sincronizado sin distracciones. Interfaz fluida, notificaciones inteligentes y una arquitectura que garantiza tiempos de carga casi nulos. Todo en la palma de tu mano.',
+                    en: 'Designed to keep your team synced without distractions. Fluid interface, smart notifications, and an architecture that guarantees near-zero load times. Everything in the palm of your hand.'
+                },
+                images: [
+                    'a1.jpg', 'a2.jpg', 'a3.jpg', 'a4.jpg', 
+                    'a5.jpg', 'a6.jpg', 'a7.jpg', 'a8.jpg'
+                ]
+            },
+            'analytics': {
+                title: 'Minima Analytics.',
+                description: {
+                    es: 'Convierte el ruido en señales claras. Visualización de datos en tiempo real mediante paneles limpios y minimalistas que te permiten tomar decisiones de negocio al instante, sin perderte en complejas hojas de cálculo.',
+                    en: 'Turn noise into clear signals. Real-time data visualization through clean, minimalist dashboards that let you make instant business decisions, without getting lost in complex spreadsheets.'
+                },
+                images: [
+                    'd1.jpg', 'd2.jpg', 'd3.jpg', 'd4.jpg', 
+                    'd5.jpg', 'd6.jpg', 'd7.jpg', 'd8.jpg'
+                ]
+            },
+            'core': {
+                title: 'Minima Core.',
+                description: {
+                    es: 'El corazón de tu infraestructura digital. Un sistema central diseñado para ser robusto y escalable, eliminando el código heredado y apostando por la máxima eficiencia técnica para empresas exigentes.',
+                    en: 'The heart of your digital infrastructure. A core system designed to be robust and scalable, eliminating legacy code and betting on maximum technical efficiency for demanding enterprises.'
+                },
+                images: [
+                    'c1.jpg', 'c2.jpg', 'c3.jpg', 'c4.jpg', 
+                    'c5.jpg', 'c6.jpg', 'c7.jpg', 'c8.jpg'
+                ]
+            }
+        };
+
+        // Función para cambiar el idioma
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const currentLang = html.getAttribute('lang') || 'es';
+            const newLang = currentLang === 'es' ? 'en' : 'es';
+            
+            // Cambiar atributo global, el CSS se encarga del resto
+            html.setAttribute('lang', newLang);
+
+            // Si hay un modal abierto, actualizamos su texto en vivo
+            if(currentOpenProductId) {
+                updateModalTexts(currentOpenProductId, newLang);
+            }
+        }
+
+        // Función auxiliar para actualizar textos del modal
+        function updateModalTexts(id, lang) {
+            const data = productsData[id];
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-desc').innerText = data.description[lang];
+        }
+
+        function openProduct(id) {
+            const data = productsData[id];
+            if(!data) return;
+            
+            currentOpenProductId = id;
+            const currentLang = document.documentElement.getAttribute('lang') || 'es';
+            
+            // Llenar textos
+            updateModalTexts(id, currentLang);
+            
+            // Construir galería con las 8 imágenes
+            const gallery = document.getElementById('modal-gallery');
+            gallery.innerHTML = '';
+            
+            data.images.forEach((imgSrc, index) => {
+                const delay = index * 50; 
+                gallery.innerHTML += `
+                    <div class="relative w-full aspect-[4/5] sm:aspect-square lg:aspect-[3/4] overflow-hidden rounded-2xl bg-gray-100 opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: ${delay}ms" id="gallery-img-${index}">
+                        <img src="${imgSrc}" alt="" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                    </div>
+                `;
+            });
+
+            lucide.createIcons();
+            const modal = document.getElementById('product-modal');
+            document.body.style.overflow = 'hidden'; 
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-12');
+                modal.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                
+                data.images.forEach((_, index) => {
+                    const imgWrapper = document.getElementById(`gallery-img-${index}`);
+                    if(imgWrapper) {
+                        imgWrapper.classList.remove('opacity-0', 'translate-y-4');
+                        imgWrapper.classList.add('opacity-100', 'translate-y-0');
+                    }
+                });
+            }, 10);
+        }
+
+        function closeProduct() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            modal.classList.add('opacity-0', 'pointer-events-none', 'translate-y-12');
+            document.body.style.overflow = '';
+            currentOpenProductId = null;
+        }
+    </script>
+</body>
+</html>
