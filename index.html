@@ -5,21 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="theme-color" content="#ffffff">
     <title>Minima | Desarrollo Minimalista</title>
-    <!-- Tailwind CSS -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
+    
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        // Usamos la variable CSS para que sea fácil de cambiar si el JPEG lo requiere
+                        'brand-white': 'var(--bg-brand)',
+                    },
                     fontFamily: {
-                        /* Añadimos fuentes del sistema por defecto para que cargue instantáneamente antes que Inter */
                         sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
                     },
                     animation: {
@@ -41,15 +44,19 @@
         }
     </script>
     <style>
+        :root {
+            /* ESTE ES EL COLOR DE FONDO GLOBAL. 
+               Si tu imagen JPEG no es 100% blanca (#FFFFFF), cambia este valor 
+               por el color exacto de tu imagen (ej. #FEFEFE o #FCFCFC) */
+            --bg-brand: #FFFFFF;
+        }
+
         /* Ocultar elementos antes de la animación para evitar parpadeos */
         .animate-on-load { opacity: 0; }
         
-        /* Optimizaciones para móviles de gama baja y fluidez general */
-        html {
-            -webkit-text-size-adjust: 100%; /* Evita que los móviles cambien el tamaño del texto al girar */
-        }
+        /* Optimizaciones para móviles */
+        html { -webkit-text-size-adjust: 100%; }
         
-        /* Si el dispositivo es antiguo o tiene activado reducir movimiento, quitamos animaciones */
         @media (prefers-reduced-motion: reduce) {
             .animate-on-load {
                 animation: none !important;
@@ -58,24 +65,16 @@
             }
         }
         
-        /* Aceleración por hardware para las animaciones */
-        .animate-fade-in, .animate-fade-in-up {
-            will-change: opacity, transform;
-        }
+        .animate-fade-in, .animate-fade-in-up { will-change: opacity, transform; }
+        .text-balance { text-wrap: balance; }
 
-        /* Utilidad para balanceo de texto */
-        .text-balance {
-            text-wrap: balance;
-        }
-
-        /* Sistema de Idiomas: Oculta el idioma que no esté seleccionado */
+        /* Sistema de Idiomas */
         html[lang="es"] .lang-en { display: none !important; }
         html[lang="en"] .lang-es { display: none !important; }
     </style>
 </head>
-<body class="bg-white text-gray-900 font-sans antialiased flex flex-col min-h-[100dvh] selection:bg-gray-900 selection:text-white">
+<body class="bg-brand-white text-gray-900 font-sans antialiased flex flex-col min-h-[100dvh] selection:bg-gray-900 selection:text-white transition-colors duration-300">
 
-    <!-- Navegación -->
     <nav class="container mx-auto px-6 py-6 md:py-8 flex justify-between items-center animate-on-load animate-fade-in">
         <div class="text-2xl font-extrabold tracking-tighter flex items-center gap-2">
             <div class="w-4 h-4 bg-black rounded-sm"></div>
@@ -93,7 +92,6 @@
             </a>
         </div>
         <div class="flex items-center gap-4">
-            <!-- Botón de cambio de idioma -->
             <button onclick="toggleLanguage()" class="text-xs font-bold tracking-widest hover:text-black text-gray-400 transition-colors">
                 <span class="lang-es">EN</span><span class="lang-en">ES</span>
             </button>
@@ -103,15 +101,14 @@
         </div>
     </nav>
 
-    <!-- Sección Hero -->
     <main class="flex-grow flex flex-col justify-center items-center text-center relative overflow-hidden w-full">
-        <div class="hidden sm:block absolute top-1/2 -translate-y-1/2 -right-20 w-96 h-96 bg-gray-50 rounded-full blur-3xl -z-10"></div>
+        <!-- Eliminamos el círculo gris de fondo para mantener el blanco absoluto -->
         
         <div class="container mx-auto px-6 py-12 sm:py-20 md:py-32 landscape:py-10 max-w-5xl flex flex-col items-center justify-center">
             
-            <!-- Logo Centrado -->
+            <!-- Logo Centrado SIN mix-blend para respetar su blanco original -->
             <div class="animate-on-load animate-fade-in-up mb-8" style="animation-delay: 0.1s;">
-                <img src="logo.jpg" alt="Minima Software Logo" class="w-48 sm:w-64 md:w-80 lg:w-[400px] mix-blend-multiply drop-shadow-xl hover:scale-105 transition-transform duration-700">
+                <img src="logo.jpg" alt="Minima Software Logo" class="w-48 sm:w-64 md:w-80 lg:w-[400px] drop-shadow-2xl hover:scale-105 transition-transform duration-700">
             </div>
 
             <div class="animate-on-load animate-fade-in-up flex flex-col items-center" style="animation-delay: 0.2s;">
@@ -127,7 +124,7 @@
                     <a href="#contacto" class="px-6 py-4 sm:px-8 bg-black text-white rounded-full font-medium text-center hover:bg-gray-800 active:scale-95 sm:hover:scale-105 transition-all duration-300">
                         <span class="lang-es">Empezar un proyecto</span><span class="lang-en">Start a project</span>
                     </a>
-                    <a href="#productos" class="px-6 py-4 sm:px-8 bg-gray-50 text-black rounded-full font-medium text-center hover:bg-gray-100 active:bg-gray-200 transition-all duration-300 flex items-center justify-center gap-2">
+                    <a href="#productos" class="px-6 py-4 sm:px-8 bg-gray-50 text-black rounded-full font-medium text-center hover:bg-gray-100 active:bg-gray-200 transition-all duration-300 flex items-center justify-center gap-2 border border-gray-200">
                         <span class="lang-es">Ver productos</span><span class="lang-en">View products</span>
                         <i data-lucide="arrow-down" class="w-4 h-4"></i>
                     </a>
@@ -136,8 +133,7 @@
         </div>
     </main>
 
-    <!-- Sección Productos -->
-    <section id="productos" class="py-16 sm:py-24 bg-white">
+    <section id="productos" class="py-16 sm:py-24 bg-brand-white">
         <div class="container mx-auto px-6 max-w-6xl">
             <div class="mb-12 sm:mb-16">
                 <h2 class="text-xs sm:text-sm font-bold tracking-widest text-gray-400 uppercase mb-2 sm:mb-3">
@@ -149,7 +145,6 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
-                <!-- Producto 1 -->
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('app')">
                     <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
                         <img src="app.jpg" alt="Minima App" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
@@ -162,7 +157,6 @@
                     </div>
                 </div>
 
-                <!-- Producto 2 -->
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('analytics')">
                     <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
                         <img src="datos.jpg" alt="Minima Analytics" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
@@ -175,7 +169,6 @@
                     </div>
                 </div>
 
-                <!-- Producto 3 -->
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('core')">
                     <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
                         <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
@@ -191,8 +184,7 @@
         </div>
     </section>
 
-    <!-- Sección Servicios -->
-    <section id="servicios" class="py-16 sm:py-24 bg-gray-50/50">
+    <section id="servicios" class="py-16 sm:py-24 bg-brand-white">
         <div class="container mx-auto px-6">
             <div class="mb-12 sm:mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
                 <div>
@@ -210,8 +202,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                <!-- Servicio 1 -->
-                <div class="group p-8 rounded-3xl hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-transparent hover:border-gray-100">
+                <div class="group p-8 rounded-3xl hover:bg-gray-50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-gray-100">
                     <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="code" class="w-5 h-5"></i>
                     </div>
@@ -224,8 +215,7 @@
                     </p>
                 </div>
 
-                <!-- Servicio 2 -->
-                <div class="group p-8 rounded-3xl hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-transparent hover:border-gray-100">
+                <div class="group p-8 rounded-3xl hover:bg-gray-50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-gray-100">
                     <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="smartphone" class="w-5 h-5"></i>
                     </div>
@@ -238,8 +228,7 @@
                     </p>
                 </div>
 
-                <!-- Servicio 3 -->
-                <div class="group p-8 rounded-3xl hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-transparent hover:border-gray-100">
+                <div class="group p-8 rounded-3xl hover:bg-gray-50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 border border-gray-100">
                     <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="layers" class="w-5 h-5"></i>
                     </div>
@@ -255,7 +244,6 @@
         </div>
     </section>
 
-    <!-- Sección Filosofía Ampliada -->
     <section id="filosofia" class="py-20 sm:py-32 bg-black text-white">
         <div class="container mx-auto px-6 max-w-6xl">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -285,8 +273,7 @@
         </div>
     </section>
 
-    <!-- Footer / Contacto -->
-    <footer id="contacto" class="py-12 border-t border-gray-100 bg-white">
+    <footer id="contacto" class="py-12 border-t border-gray-100 bg-brand-white">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
                 <div class="text-2xl font-bold tracking-tighter flex items-center gap-2">
@@ -324,9 +311,8 @@
         </div>
     </footer>
 
-    <!-- Espacio del Producto (Modal Overlay) -->
-    <div id="product-modal" class="fixed inset-0 z-[100] bg-white overflow-y-auto opacity-0 pointer-events-none translate-y-12 transition-all duration-500 ease-out flex flex-col">
-        <div class="sticky top-0 bg-white/90 backdrop-blur-md z-10 border-b border-gray-100 px-6 py-4 md:py-6 flex justify-between items-center">
+    <div id="product-modal" class="fixed inset-0 z-[100] bg-brand-white overflow-y-auto opacity-0 pointer-events-none translate-y-12 transition-all duration-500 ease-out flex flex-col">
+        <div class="sticky top-0 bg-brand-white/90 backdrop-blur-md z-10 border-b border-gray-100 px-6 py-4 md:py-6 flex justify-between items-center">
             <h3 id="modal-title" class="text-xl md:text-2xl font-bold tracking-tight"></h3>
             <button onclick="closeProduct()" class="w-10 h-10 md:w-12 md:h-12 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-200 hover:rotate-90 transition-all duration-300 text-gray-900" aria-label="Cerrar">
                 <i data-lucide="x" class="w-5 h-5 md:w-6 md:h-6"></i>
@@ -339,13 +325,11 @@
         </div>
     </div>
 
-    <!-- Script de Lógica e Idiomas -->
     <script>
         lucide.createIcons();
 
         let currentOpenProductId = null;
 
-        // Base de datos de productos adaptada a dos idiomas
         const productsData = {
             'app': {
                 title: 'Minima App.',
@@ -382,22 +366,18 @@
             }
         };
 
-        // Función para cambiar el idioma
         function toggleLanguage() {
             const html = document.documentElement;
             const currentLang = html.getAttribute('lang') || 'es';
             const newLang = currentLang === 'es' ? 'en' : 'es';
             
-            // Cambiar atributo global, el CSS se encarga del resto
             html.setAttribute('lang', newLang);
 
-            // Si hay un modal abierto, actualizamos su texto en vivo
             if(currentOpenProductId) {
                 updateModalTexts(currentOpenProductId, newLang);
             }
         }
 
-        // Función auxiliar para actualizar textos del modal
         function updateModalTexts(id, lang) {
             const data = productsData[id];
             document.getElementById('modal-title').innerText = data.title;
@@ -411,10 +391,8 @@
             currentOpenProductId = id;
             const currentLang = document.documentElement.getAttribute('lang') || 'es';
             
-            // Llenar textos
             updateModalTexts(id, currentLang);
             
-            // Construir galería con las 8 imágenes
             const gallery = document.getElementById('modal-gallery');
             gallery.innerHTML = '';
             
