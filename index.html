@@ -108,7 +108,7 @@
             
             <!-- Logo Centrado -->
             <div class="animate-on-load animate-fade-in-up mb-8" style="animation-delay: 0.1s;">
-                <img id="main-logo" src="logo1.jpg" alt="Minima Software Logo" class="w-[576px] sm:w-[768px] md:w-[960px] lg:w-[1200px] max-w-[90vw] object-contain hover:scale-105 transition-transform duration-700">
+                <img id="main-logo" src="logo1.jpg" alt="Minima Software Logo" class="w-[1200px] max-w-[90vw] h-auto block hover:scale-105 transition-transform duration-700">
             </div>
 
             <div class="animate-on-load animate-fade-in-up flex flex-col items-center" style="animation-delay: 0.2s;">
@@ -146,9 +146,9 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('app')">
-                    <!-- Eliminado el bg-gray-100 -->
-                    <div class="relative w-full aspect-[9/16] overflow-hidden rounded-3xl bg-transparent">
-                        <img src="app.jpg" alt="Minima App" loading="lazy" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
+                    <div class="relative w-full overflow-hidden rounded-3xl">
+                        <img src="app.jpg" alt="Minima App" loading="lazy" class="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
                         <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima App</h4>
@@ -159,9 +159,9 @@
                 </div>
 
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('analytics')">
-                    <!-- Eliminado el bg-gray-100 -->
-                    <div class="relative w-full aspect-[9/16] overflow-hidden rounded-3xl bg-transparent">
-                        <img src="datos.jpg" alt="Minima Analytics" loading="lazy" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
+                    <div class="relative w-full overflow-hidden rounded-3xl">
+                        <img src="datos.jpg" alt="Minima Analytics" loading="lazy" class="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
                         <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima Analytics</h4>
@@ -172,9 +172,9 @@
                 </div>
 
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('core')">
-                    <!-- Eliminado el bg-gray-100 -->
-                    <div class="relative w-full aspect-[9/16] overflow-hidden rounded-3xl bg-transparent">
-                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
+                    <div class="relative w-full overflow-hidden rounded-3xl">
+                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
                         <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima Core</h4>
@@ -402,8 +402,8 @@
             data.images.forEach((imgSrc, index) => {
                 const delay = index * 50; 
                 gallery.innerHTML += `
-                    <div class="relative w-full aspect-[4/5] sm:aspect-square lg:aspect-[3/4] overflow-hidden rounded-2xl bg-gray-100 opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: ${delay}ms" id="gallery-img-${index}">
-                        <img src="${imgSrc}" alt="" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                    <div class="relative w-full overflow-hidden rounded-2xl opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: ${delay}ms" id="gallery-img-${index}">
+                        <img src="${imgSrc}" alt="" loading="lazy" class="w-full h-auto block hover:scale-110 transition-transform duration-700">
                     </div>
                 `;
             });
