@@ -76,10 +76,9 @@
 <body class="bg-brand-white text-gray-900 font-sans antialiased flex flex-col min-h-[100dvh] selection:bg-gray-900 selection:text-white transition-colors duration-300">
 
     <nav class="container mx-auto px-6 py-6 md:py-8 flex justify-between items-center animate-on-load animate-fade-in">
-        <div class="text-2xl font-extrabold tracking-tighter flex items-center gap-2">
-            <div class="w-4 h-4 bg-black rounded-sm"></div>
-            Minima.
-        </div>
+        <a href="#" class="flex items-center transition-transform hover:scale-105">
+            <img src="logo1.png" alt="Minima Logo" class="h-8 md:h-10 w-auto">
+        </a>
         <div class="hidden md:flex gap-8 text-sm font-medium text-gray-500">
             <a href="#productos" class="hover:text-black transition-colors">
                 <span class="lang-es">Productos</span><span class="lang-en">Products</span>
@@ -173,15 +172,15 @@
                     </div>
                 </a>
 
-                <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('core')">
+                <div class="flex flex-col gap-5">
                     <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
                     <div class="relative w-full overflow-hidden rounded-3xl">
-                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out">
+                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-auto block transition-transform duration-700 ease-out">
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima Core</h4>
+                        <h4 class="text-xl font-bold mb-1 transition-colors">TRACKS TELEMETRY V.1.0</h4>
                         <p class="text-gray-500 text-sm">
-                            <span class="lang-es">Sistema central para empresas.</span><span class="lang-en">Core system for enterprises.</span>
+                            <span class="lang-es">PRÓXIMAMENTE.</span><span class="lang-en">COMING SOON.</span>
                         </p>
                     </div>
                 </div>
@@ -268,10 +267,10 @@
                         <span class="lang-en">Our process is based on radical reduction: we eliminate the superfluous, unnecessary legacy code, and cluttered interfaces. Every line of code is optimized to deliver near-zero load times and exceptional performance. Fewer bugs, less confusion, and surgical precision.</span>
                     </p>
                     <div class="pt-6">
-                        <a href="#contacto" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                        <button onclick="openContactModal()" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
                             <span class="lang-es">Hablemos de tu idea</span><span class="lang-en">Let's talk about your idea</span>
                             <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -281,27 +280,16 @@
     <footer id="contacto" class="py-12 border-t border-gray-100 bg-brand-white">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
-                <div class="text-2xl font-bold tracking-tighter flex items-center gap-2">
-                    <div class="w-4 h-4 bg-black rounded-sm"></div>
-                    Minima.
-                </div>
+                <a href="#" class="flex items-center transition-transform hover:scale-105">
+                    <img src="logo1.png" alt="Minima Logo" class="h-8 md:h-10 w-auto">
+                </a>
                 
                 <div class="flex flex-col md:flex-row gap-6 md:gap-12 text-center md:text-left">
                     <div>
                         <h5 class="text-sm font-bold uppercase tracking-wider text-gray-900 mb-2">
                             <span class="lang-es">Escríbenos</span><span class="lang-en">Email us</span>
                         </h5>
-                        <a href="mailto:hola@minima.dev" class="text-gray-500 hover:text-black transition-colors">hola@minima.dev</a>
-                    </div>
-                    <div>
-                        <h5 class="text-sm font-bold uppercase tracking-wider text-gray-900 mb-2">
-                            <span class="lang-es">Síguenos</span><span class="lang-en">Follow us</span>
-                        </h5>
-                        <div class="flex gap-4 justify-center md:justify-start">
-                            <a href="#" class="text-gray-400 hover:text-black transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-black transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-black transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                        </div>
+                        <a href="mailto:slotsoftware@gmail.com" class="text-gray-500 hover:text-black transition-colors">slotsoftware@gmail.com</a>
                     </div>
                 </div>
             </div>
@@ -327,6 +315,51 @@
         <div class="container mx-auto px-6 py-12 md:py-20 max-w-6xl flex-grow">
             <p id="modal-desc" class="text-lg md:text-2xl lg:text-3xl text-gray-500 font-light leading-relaxed mb-16 max-w-4xl text-balance"></p>
             <div id="modal-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm overflow-y-auto opacity-0 pointer-events-none transition-all duration-500 ease-out flex items-center justify-center p-4 sm:p-6">
+        <div class="bg-brand-white w-full max-w-xl rounded-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-500 ease-out" id="contact-modal-content">
+            <div class="px-6 py-4 md:py-6 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="text-xl md:text-2xl font-bold tracking-tight">
+                    <span class="lang-es">Cuéntanos tu idea</span><span class="lang-en">Tell us your idea</span>
+                </h3>
+                <button onclick="closeContactModal()" class="w-10 h-10 md:w-12 md:h-12 bg-gray-50 rounded-full flex items-center justify-center hover:bg-gray-200 hover:rotate-90 transition-all duration-300 text-gray-900" aria-label="Cerrar">
+                    <i data-lucide="x" class="w-5 h-5 md:w-6 md:h-6"></i>
+                </button>
+            </div>
+            <div class="p-6 sm:p-8 md:p-10">
+                <!-- Usamos FormSubmit para enviar el correo directamente a slotsoftware@gmail.com sin backend -->
+                <form action="https://formsubmit.co/slotsoftware@gmail.com" method="POST" class="flex flex-col gap-6">
+                    <!-- Configuraciones ocultas de formsubmit -->
+                    <input type="hidden" name="_subject" value="Nuevo contacto desde Minima Web">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="box">
+
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                            <span class="lang-es">Tu nombre</span><span class="lang-en">Your name</span>
+                        </label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-1 focus:ring-black outline-none transition-all bg-gray-50 focus:bg-white text-gray-900">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                            <span class="lang-es">Correo electrónico</span><span class="lang-en">Email address</span>
+                        </label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-1 focus:ring-black outline-none transition-all bg-gray-50 focus:bg-white text-gray-900">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+                            <span class="lang-es">¿Qué tienes en mente?</span><span class="lang-en">What's on your mind?</span>
+                        </label>
+                        <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-1 focus:ring-black outline-none transition-all bg-gray-50 focus:bg-white resize-none text-gray-900"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-black text-white rounded-xl font-medium hover:bg-gray-800 transition-colors mt-2">
+                        <span class="lang-es">Enviar mensaje</span><span class="lang-en">Send message</span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -359,7 +392,7 @@
                 ]
             },
             'core': {
-                title: 'Minima Core.',
+                title: 'TRACKS TELEMETRY V.1.0',
                 description: {
                     es: 'El corazón de tu infraestructura digital. Un sistema central diseñado para ser robusto y escalable, eliminando el código heredado y apostando por la máxima eficiencia técnica para empresas exigentes.',
                     en: 'The heart of your digital infrastructure. A core system designed to be robust and scalable, eliminating legacy code and betting on maximum technical efficiency for demanding enterprises.'
@@ -434,6 +467,35 @@
             modal.classList.add('opacity-0', 'pointer-events-none', 'translate-y-12');
             document.body.style.overflow = '';
             currentOpenProductId = null;
+        }
+
+        // Funciones para el Modal de Contacto
+        function openContactModal() {
+            const modal = document.getElementById('contact-modal');
+            const content = document.getElementById('contact-modal-content');
+            document.body.style.overflow = 'hidden';
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+            
+            setTimeout(() => {
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contact-modal');
+            const content = document.getElementById('contact-modal-content');
+            
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-100', 'pointer-events-auto');
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = '';
+            }, 300);
         }
     </script>
 </body>
