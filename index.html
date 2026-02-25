@@ -145,18 +145,19 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
-                <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('app')">
+                <!-- Tarjeta convertida en enlace directo a la aplicación -->
+                <a href="https://slotcarhome-star.github.io/KronoPlataVi/" target="_blank" rel="noopener noreferrer" class="group flex flex-col gap-5 cursor-pointer block">
                     <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
                     <div class="relative w-full overflow-hidden rounded-3xl">
                         <img src="app.jpg" alt="Minima App" loading="lazy" class="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima App</h4>
+                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">KRONO PERSONAL V.3.0</h4>
                         <p class="text-gray-500 text-sm">
-                            <span class="lang-es">Plataforma móvil de gestión.</span><span class="lang-en">Mobile management platform.</span>
+                            <span class="lang-es">Es el gestor de tiempos ideal para entrenamientos personales. Esta aplicación no necesita instalación, es compatible Android, IOS, Windows y Linux.</span><span class="lang-en">The ideal time manager for personal training. This application requires no installation and is compatible with Android, iOS, Windows, and Linux.</span>
                         </p>
                     </div>
-                </div>
+                </a>
 
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('analytics')">
                     <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
@@ -335,10 +336,10 @@
 
         const productsData = {
             'app': {
-                title: 'Minima App.',
+                title: 'KRONO PERSONAL V.3.0',
                 description: {
-                    es: 'Diseñada para mantener a tu equipo sincronizado sin distracciones. Interfaz fluida, notificaciones inteligentes y una arquitectura que garantiza tiempos de carga casi nulos. Todo en la palma de tu mano.',
-                    en: 'Designed to keep your team synced without distractions. Fluid interface, smart notifications, and an architecture that guarantees near-zero load times. Everything in the palm of your hand.'
+                    es: 'Es el gestor de tiempos ideal para entrenamientos personales. Esta aplicación no necesita instalación, es compatible Android, IOS, Windows y Linux.',
+                    en: 'The ideal time manager for personal training. This application requires no installation and is compatible with Android, iOS, Windows, and Linux.'
                 },
                 images: [
                     'a1.jpg', 'a2.jpg', 'a3.jpg', 'a4.jpg', 
@@ -436,4 +437,3 @@
     </script>
 </body>
 </html>
-
