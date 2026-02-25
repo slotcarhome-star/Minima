@@ -146,8 +146,8 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('app')">
-                    <div class="relative w-full overflow-hidden rounded-3xl bg-gray-100">
-                        <img src="app.jpg" alt="Minima App" loading="lazy" class="block w-full h-auto group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
+                        <img src="app.jpg" alt="Minima App" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
                         <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima App</h4>
@@ -158,8 +158,8 @@
                 </div>
 
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('analytics')">
-                    <div class="relative w-full overflow-hidden rounded-3xl bg-gray-100">
-                        <img src="datos.jpg" alt="Minima Analytics" loading="lazy" class="block w-full h-auto group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
+                        <img src="datos.jpg" alt="Minima Analytics" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
                         <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima Analytics</h4>
@@ -170,8 +170,8 @@
                 </div>
 
                 <div class="group flex flex-col gap-5 cursor-pointer" onclick="openProduct('core')">
-                    <div class="relative w-full overflow-hidden rounded-3xl bg-gray-100">
-                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="block w-full h-auto group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-gray-100">
+                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
                         <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">Minima Core</h4>
@@ -399,8 +399,8 @@
             data.images.forEach((imgSrc, index) => {
                 const delay = index * 50; 
                 gallery.innerHTML += `
-                    <div class="relative w-full overflow-hidden rounded-2xl bg-gray-100 opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: ${delay}ms" id="gallery-img-${index}">
-                        <img src="${imgSrc}" alt="" loading="lazy" class="block w-full h-auto hover:scale-110 transition-transform duration-700">
+                    <div class="relative w-full aspect-[4/5] sm:aspect-square lg:aspect-[3/4] overflow-hidden rounded-2xl bg-gray-100 opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: ${delay}ms" id="gallery-img-${index}">
+                        <img src="${imgSrc}" alt="" loading="lazy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
                     </div>
                 `;
             });
