@@ -146,9 +146,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
                 <!-- Tarjeta convertida en enlace directo a la aplicación Tracks Telemetry -->
                 <a href="https://slotcarhome-star.github.io/TracksVi/" target="_blank" rel="noopener noreferrer" class="group flex flex-col gap-5 cursor-pointer block">
-                    <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
-                    <div class="relative w-full overflow-hidden rounded-3xl">
-                        <img src="app.jpg" alt="Minima App" loading="lazy" class="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <!-- Contenedor con aspect-ratio fijo para igualar tamaños -->
+                    <div class="relative w-full aspect-[4/3] overflow-hidden rounded-3xl">
+                        <img src="app.jpg" alt="Minima App" loading="lazy" class="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
                         <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">KRONO PERSONAL V.3.0</h4>
@@ -160,9 +160,9 @@
 
                 <!-- Tarjeta convertida en enlace directo a la aplicación Krono Dual -->
                 <a href="https://slotcarhome-star.github.io/KronoDualVi/" target="_blank" rel="noopener noreferrer" class="group flex flex-col gap-5 cursor-pointer block">
-                    <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
-                    <div class="relative w-full overflow-hidden rounded-3xl">
-                        <img src="datos.jpg" alt="Minima Analytics" loading="lazy" class="w-full h-auto block group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <!-- Contenedor con aspect-ratio fijo para igualar tamaños -->
+                    <div class="relative w-full aspect-[4/3] overflow-hidden rounded-3xl">
+                        <img src="datos.jpg" alt="Minima Analytics" loading="lazy" class="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
                         <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">KRONO DUAL V.3.0</h4>
@@ -172,18 +172,19 @@
                     </div>
                 </a>
 
-                <div class="flex flex-col gap-5">
-                    <!-- Contenedor ajustado a la imagen original sin forzar proporciones -->
-                    <div class="relative w-full overflow-hidden rounded-3xl">
-                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-auto block transition-transform duration-700 ease-out">
+                <!-- Tarjeta convertida en enlace directo a la aplicación Tracks Telemetry -->
+                <a href="https://slotcarhome-star.github.io/TracksVi/" target="_blank" rel="noopener noreferrer" class="group flex flex-col gap-5 cursor-pointer block">
+                    <!-- Contenedor con aspect-ratio fijo para igualar tamaños -->
+                    <div class="relative w-full aspect-[4/3] overflow-hidden rounded-3xl">
+                        <img src="core.jpg" alt="Minima Core" loading="lazy" class="w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700 ease-out">
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 transition-colors">TRACKS TELEMETRY V.1.0</h4>
+                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">TRACKS TELEMETRY V.1.0</h4>
                         <p class="text-gray-500 text-sm">
                             <span class="lang-es">Estás a punto de llevar el análisis de tu pista a límites increíbles, desde el Diseño en 2D, analógico, Digital, Rally y Multicarril hasta 8 pistas, transformando tu Diseño en un motor potente en 3D, con controles de Motores, Neumáticos, Piñones, Coronas, Peso, Voltaje. Comunidad en la Web para compartir Circuitos, Visores de Coches Reales, Decoraciones de Circuitos y mucho más. ¡A QUÉ ESPERAS!</span><span class="lang-en">You are about to take your track analysis to incredible limits, from 2D Design, analog, Digital, Rally, and Multi-lane up to 8 tracks, transforming your Design into a powerful 3D engine, with controls for Motors, Tires, Pinions, Crowns, Weight, Voltage. Web community to share Circuits, Real Car Viewers, Circuit Decorations and much more. WHAT ARE YOU WAITING FOR!</span>
                         </p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
