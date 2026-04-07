@@ -322,13 +322,13 @@
             <div class="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
                 <p>&copy; 2026 Minima. <span class="lang-es">Todos los derechos reservados.</span><span class="lang-en">All rights reserved.</span></p>
                 
-                <!-- Contador de Visitas en Vivo -->
-                <div class="flex items-center gap-3 px-4 py-1.5 bg-gray-50 rounded-full border border-gray-200" title="Visitas totales estimadas">
+                <!-- Contador de Visitas Reales -->
+                <div class="flex items-center gap-3 px-4 py-1.5 bg-gray-50 rounded-full border border-gray-200" title="Visitas totales reales">
                     <span class="relative flex h-2.5 w-2.5">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                     </span>
-                    <span id="visitor-count" class="font-mono font-medium text-gray-900 tracking-tight">--</span>
+                    <span id="visitor-count" class="font-mono font-medium text-gray-900 tracking-tight">...</span>
                     <span class="text-xs text-gray-500 uppercase tracking-widest"><span class="lang-es">Visitas</span><span class="lang-en">Visits</span></span>
                 </div>
 
@@ -423,46 +423,42 @@
             }, 300);
         }
 
-        // Lógica del Contador de Visitas Dinámico
-        function initCounter() {
+        // Lógica del Contador de Visitas REAL
+        async function initCounter() {
             const counterEl = document.getElementById('visitor-count');
             if (!counterEl) return;
 
-            // Fecha base de inicio (1 de enero de 2024)
-            const startDate = new Date('2024-01-01').getTime();
-            const now = Date.now();
+            // Utilizamos CounterAPI, una base de datos gratuita para llevar el conteo real
+            // El sufijo '/up' hace que automáticamente sume 1 visita en el servidor cada vez que alguien entra
+            const namespace = 'minima-app-stats'; 
+            const key = 'visitas-reales';
+            const apiUrl = `https://api.counterapi.dev/v1/${namespace}/${key}/up`;
 
-            // Cálculo constante: Aumenta matemáticamente con los días transcurridos
-            // Simulamos ~1 visita cada 25 minutos
-            const msPerVisit = 1000 * 60 * 25; 
-            let baseVisits = 18450 + Math.floor((now - startDate) / msPerVisit);
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('Error en la red');
+                const data = await response.json();
+                
+                const totalVisits = data.count;
+                
+                // Animación rápida desde 0 hasta el número real
+                let currentDisplay = 0;
+                const step = Math.ceil(totalVisits / 20); // Velocidad de la animación
+                
+                const updateDisplay = setInterval(() => {
+                    currentDisplay += step;
+                    if (currentDisplay >= totalVisits) {
+                        currentDisplay = totalVisits;
+                        clearInterval(updateDisplay);
+                    }
+                    // Muestra el número con puntos (ej: 1.204)
+                    counterEl.innerText = new Intl.NumberFormat('es-ES').format(currentDisplay);
+                }, 40);
 
-            // Variación por sesión: Añade un pequeño salto aleatorio al recargar la página
-            let sessionVisits = parseInt(sessionStorage.getItem('minima_visits') || '0');
-            sessionVisits += Math.floor(Math.random() * 3) + 1; 
-            sessionStorage.setItem('minima_visits', sessionVisits);
-
-            let totalVisits = baseVisits + sessionVisits;
-            const formatNumber = (num) => new Intl.NumberFormat('es-ES').format(num);
-            
-            // Animación rápida estilo "ruleta" al cargar
-            let currentDisplay = totalVisits - 30;
-            const updateDisplay = setInterval(() => {
-                currentDisplay += 2;
-                if (currentDisplay >= totalVisits) {
-                    currentDisplay = totalVisits;
-                    clearInterval(updateDisplay);
-                }
-                counterEl.innerText = formatNumber(currentDisplay);
-            }, 40);
-
-            // Simulación en tiempo real (alguien nuevo entra mientras estás en la página)
-            setInterval(() => {
-                if (Math.random() > 0.65) { // 35% de probabilidad de nueva visita cada 12s
-                    totalVisits++;
-                    counterEl.innerText = formatNumber(totalVisits);
-                }
-            }, 12000); 
+            } catch (error) {
+                console.error('Error al conectar con el servidor de visitas:', error);
+                counterEl.innerText = "-"; // Fallback discreto si el usuario tiene bloqueadores de anuncios o falla el internet
+            }
         }
 
         // Arrancar el contador
