@@ -321,6 +321,17 @@
             
             <div class="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
                 <p>&copy; 2026 Minima. <span class="lang-es">Todos los derechos reservados.</span><span class="lang-en">All rights reserved.</span></p>
+                
+                <!-- Contador de Visitas en Vivo -->
+                <div class="flex items-center gap-3 px-4 py-1.5 bg-gray-50 rounded-full border border-gray-200" title="Visitas totales estimadas">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                    </span>
+                    <span id="visitor-count" class="font-mono font-medium text-gray-900 tracking-tight">--</span>
+                    <span class="text-xs text-gray-500 uppercase tracking-widest"><span class="lang-es">Visitas</span><span class="lang-en">Visits</span></span>
+                </div>
+
                 <div class="flex gap-4">
                     <a href="#" class="hover:text-gray-900 transition-colors"><span class="lang-es">Privacidad</span><span class="lang-en">Privacy</span></a>
                     <a href="#" class="hover:text-gray-900 transition-colors"><span class="lang-es">Términos</span><span class="lang-en">Terms</span></a>
@@ -411,6 +422,51 @@
                 document.body.style.overflow = '';
             }, 300);
         }
+
+        // Lógica del Contador de Visitas Dinámico
+        function initCounter() {
+            const counterEl = document.getElementById('visitor-count');
+            if (!counterEl) return;
+
+            // Fecha base de inicio (1 de enero de 2024)
+            const startDate = new Date('2024-01-01').getTime();
+            const now = Date.now();
+
+            // Cálculo constante: Aumenta matemáticamente con los días transcurridos
+            // Simulamos ~1 visita cada 25 minutos
+            const msPerVisit = 1000 * 60 * 25; 
+            let baseVisits = 18450 + Math.floor((now - startDate) / msPerVisit);
+
+            // Variación por sesión: Añade un pequeño salto aleatorio al recargar la página
+            let sessionVisits = parseInt(sessionStorage.getItem('minima_visits') || '0');
+            sessionVisits += Math.floor(Math.random() * 3) + 1; 
+            sessionStorage.setItem('minima_visits', sessionVisits);
+
+            let totalVisits = baseVisits + sessionVisits;
+            const formatNumber = (num) => new Intl.NumberFormat('es-ES').format(num);
+            
+            // Animación rápida estilo "ruleta" al cargar
+            let currentDisplay = totalVisits - 30;
+            const updateDisplay = setInterval(() => {
+                currentDisplay += 2;
+                if (currentDisplay >= totalVisits) {
+                    currentDisplay = totalVisits;
+                    clearInterval(updateDisplay);
+                }
+                counterEl.innerText = formatNumber(currentDisplay);
+            }, 40);
+
+            // Simulación en tiempo real (alguien nuevo entra mientras estás en la página)
+            setInterval(() => {
+                if (Math.random() > 0.65) { // 35% de probabilidad de nueva visita cada 12s
+                    totalVisits++;
+                    counterEl.innerText = formatNumber(totalVisits);
+                }
+            }, 12000); 
+        }
+
+        // Arrancar el contador
+        initCounter();
     </script>
 </body>
 </html>
