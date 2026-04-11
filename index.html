@@ -551,12 +551,17 @@
             const key = 'visitas-reales';
             const apiUrl = `https://api.counterapi.dev/v1/${namespace}/${key}/up`;
 
+            // BASE DE VISITAS: Si el contador externo se ha reiniciado, 
+            // pon aquí el número aproximado de visitas que tenías antes.
+            const BASE_VISITS = 1500; // <-- CAMBIA ESTE NÚMERO por tus visitas anteriores
+
             try {
                 const response = await fetch(apiUrl);
                 if (!response.ok) throw new Error('Error en la red');
                 const data = await response.json();
                 
-                const totalVisits = data.count;
+                // Sumamos la base recuperada a las visitas nuevas que cuenta el servidor
+                const totalVisits = data.count + BASE_VISITS;
                 
                 // Animación rápida desde 0 hasta el número real
                 let currentDisplay = 0;
