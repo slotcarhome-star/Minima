@@ -556,7 +556,8 @@
                 if (!response.ok) throw new Error('Error en la red');
                 const data = await response.json();
                 
-                const totalVisits = data.count;
+                // Añadimos el offset de 1876 visitas perdidas al contador real
+                const totalVisits = data.count + 1876;
                 
                 // Animación rápida desde 0 hasta el número real
                 let currentDisplay = 0;
