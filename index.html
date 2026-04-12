@@ -163,12 +163,12 @@
                 <!-- Tarjeta 3 con Padding Hack -->
                 <a href="https://slotcarhome-star.github.io/Demos-de-Apps/" target="_blank" rel="noopener noreferrer" class="group flex flex-col gap-5 cursor-pointer block">
                     <div class="relative w-full overflow-hidden rounded-3xl bg-gray-100" style="padding-bottom: 177.78%; height: 0;">
-                        <img src="app.jpg" alt="Krono Dual" loading="lazy" class="absolute top-0 left-0 w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700 ease-out" onerror="this.src='https://placehold.co/400x700?text=Krono+Dual'">
+                        <img src="core.jpg" alt="Tracks Telemetry" loading="lazy" class="absolute top-0 left-0 w-full h-full object-cover block group-hover:scale-105 transition-transform duration-700 ease-out" onerror="this.src='https://placehold.co/400x700?text=Tracks+Telemetry'">
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">KRONO DUAL V.3.0</h4>
+                        <h4 class="text-xl font-bold mb-1 group-hover:text-gray-600 transition-colors">TRACKS TELEMETRY</h4>
                         <p class="text-gray-500 text-sm">
-                            <span class="lang-es">Este es nuestro sistema diseñado para competiciones, los Detectores de cámara son para dos coches, máxima precisión. Esta aplicación no necesita instalación, es compatible Android, IOS, Windows y Linux.</span><span class="lang-en">This is our system designed for competitions, camera detectors are for two cars, maximum precision. This application requires no installation and is compatible with Android, iOS, Windows, and Linux.</span>
+                            <span class="lang-es">Estás a punto de llevar el análisis de tu pista a límites increíbles, desde el Diseño en 2D, analógico, Digital, Rally y Multicarril hasta 8 carriles, transformando tu Diseño en un motor potente en 3D, con controles de Motores, Neumáticos, Piñones, Coronas, Peso, Voltaje. Comunidad en la Web para compartir Circuitos, Visores de Coches Reales, Decoraciones de Circuitos y mucho más.</span><span class="lang-en">You are about to take your track analysis to incredible limits, from 2D Design, analog, Digital, Rally and Multi-lane up to 8 lanes, transforming your Design into a powerful 3D engine, with controls for Motors, Tires, Pinions, Crowns, Weight, Voltage. Web Community to share Circuits, Real Car Viewers, Circuit Decorations and much more.</span>
                         </p>
                     </div>
                 </a>
@@ -545,9 +545,6 @@
             const counterEl = document.getElementById('visitor-count');
             if (!counterEl) return;
 
-            // Base de visitas iniciales
-            const baseVisits = 1254;
-
             // Utilizamos CounterAPI, una base de datos gratuita para llevar el conteo real
             // El sufijo '/up' hace que automáticamente sume 1 visita en el servidor cada vez que alguien entra
             const namespace = 'slotsoftware-app-stats'; 
@@ -559,8 +556,7 @@
                 if (!response.ok) throw new Error('Error en la red');
                 const data = await response.json();
                 
-                // Sumamos la base inicial al conteo de la API
-                const totalVisits = data.count + baseVisits;
+                const totalVisits = data.count;
                 
                 // Animación rápida desde 0 hasta el número real
                 let currentDisplay = 0;
